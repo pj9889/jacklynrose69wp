@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join My WhatsApp Channel</title>
+    <style>
+        /* পেজ রিসেট এবং সুপারফাস্ট লোডিং */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ফুল স্ক্রিন ব্যাকগ্রাউন্ড ইমেজ */
+        .bg-container {
+            background-image: url('f1.webp'); /* আপনার ছবির নাম */
+            height: 100vh;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* বাটন নিচে রাখার জন্য */
+            padding-bottom: 50px; /* নিচ থেকে হাফ ইঞ্চি বা তার কাছাকাছি উপরে */
+        }
+
+        /* হোয়াটসঅ্যাপ বাটন ডিজাইন */
+        .wa-button {
+            background-color: #25D366; /* হোয়াটসঅ্যাপ গ্রিন */
+            color: white;
+            text-decoration: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+            animation: popUp 1.5s infinite; /* বাটন নড়াচড়া করার জন্য */
+            z-index: 100;
+        }
+
+        /* বাটন পপ-আপ বা নাড়াচড়া করার অ্যানিমেশন */
+        @keyframes popUp {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); } /* হালকা বড় হবে */
+            100% { transform: scale(1); }
+        }
+
+        /* মাউস নিলে স্থির হবে এবং কালার চেঞ্জ হবে */
+        .wa-button:hover {
+            background-color: #128C7E;
+            animation-play-state: paused;
+        }
+
+        /* ছোট আইকন (অপশনাল) */
+        .wa-button i {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-container">
+        <!-- আপনার হোয়াটসঅ্যাপ লিঙ্কটি এখানে বসান -->
+        <a href="https://dermablend.com" class="wa-button">
+            Join WhatsApp Channel
+        </a>
+    </div>
+
+</body>
+</html>
