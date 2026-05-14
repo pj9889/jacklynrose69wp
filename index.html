@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join My WhatsApp Channel</title>
     <style>
-        /* পেজ রিসেট এবং সুপারফাস্ট লোডিং */
+        /* দ্রুত লোডিংয়ের জন্য বেসিক রিসেট */
         * {
             margin: 0;
             padding: 0;
@@ -16,12 +16,12 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* ফুল স্ক্রিন ব্যাকগ্রাউন্ড ইমেজ */
-        .bg-container {
-            background-image: url('f1.webp'); /* আপনার ছবির নাম */
+        /* ফুল স্ক্রিন ব্যাকগ্রাউন্ড ইমেজ (f1.webp) */
+        .landing-page {
+            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('f1.webp');
             height: 100vh;
             background-position: center;
             background-repeat: no-repeat;
@@ -29,51 +29,57 @@
             display: flex;
             justify-content: center;
             align-items: flex-end; /* বাটন নিচে রাখার জন্য */
-            padding-bottom: 50px; /* নিচ থেকে হাফ ইঞ্চি বা তার কাছাকাছি উপরে */
+            padding-bottom: 80px; /* নিচ থেকে হাফ ইঞ্চির একটু বেশি উপরে রাখা হয়েছে */
         }
 
-        /* হোয়াটসঅ্যাপ বাটন ডিজাইন */
-        .wa-button {
-            background-color: #25D366; /* হোয়াটসঅ্যাপ গ্রিন */
+        /* আকর্ষণীয় হোয়াটসঅ্যাপ বাটন */
+        .whatsapp-btn {
+            background-color: #25D366; /* WhatsApp Green */
             color: white;
             text-decoration: none;
-            padding: 18px 45px;
+            padding: 20px 50px;
             border-radius: 50px;
             font-size: 22px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.2s ease;
-            animation: popUp 1.5s infinite; /* বাটন নড়াচড়া করার জন্য */
-            z-index: 100;
+            text-transform: uppercase;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: 0.3s;
+            animation: pulse-animation 1.5s infinite; /* বাটন পপ-আপ ইফেক্ট */
+            display: inline-block;
+            text-align: center;
         }
 
-        /* বাটন পপ-আপ বা নাড়াচড়া করার অ্যানিমেশন */
-        @keyframes popUp {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); } /* হালকা বড় হবে */
-            100% { transform: scale(1); }
+        /* বাটনটি নাড়াচাড়া করার বা পপ-আপ করার অ্যানিমেশন */
+        @keyframes pulse-animation {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
         }
 
-        /* মাউস নিলে স্থির হবে এবং কালার চেঞ্জ হবে */
-        .wa-button:hover {
+        /* বাটনে মাউস নিলে অ্যানিমেশন স্টপ হবে এবং কালার চেঞ্জ হবে */
+        .whatsapp-btn:hover {
             background-color: #128C7E;
+            transform: translateY(-3px);
             animation-play-state: paused;
         }
 
-        /* ছোট আইকন (অপশনাল) */
-        .wa-button i {
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
 
-    <div class="bg-container">
-        <!-- আপনার হোয়াটসঅ্যাপ লিঙ্কটি এখানে বসান -->
-        <a href="https://dermablend.com" class="wa-button">
-            Join WhatsApp Channel
+    <div class="landing-page">
+        <!-- আপনার দেওয়া হোয়াটসঅ্যাপ চ্যানেল লিঙ্ক -->
+        <a href="https://whatsapp.com/channel/0029Vb8E6XW002T0uNPN4S3D" class="whatsapp-btn">
+            Visit Now
         </a>
     </div>
 
