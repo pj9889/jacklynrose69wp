@@ -17,9 +17,27 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { 
             background: #0d1117; 
-            display: flex; align-items: center; justify-content: center; 
-            min-height: 100vh; color: #fff; overflow: hidden; 
+            display: flex; 
+            flex-direction: column; /* অ্যাড উপরে এবং কনটেন্ট নিচে রাখার জন্য */
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            color: #fff; 
+            overflow: hidden; 
             transition: filter 0.4s ease;
+            position: relative;
+        }
+
+        /* বিজ্ঞাপনের বক্স ডিজাইন (একদম উপরে থেকে একটু নিচে) */
+        .top-ad-container {
+            position: absolute;
+            top: 15px; /* একদম উপর থেকে একটু নিচে নামানোর জন্য */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 50px;
+            z-index: 999; /* যেন সবার উপরে থাকে */
+            text-align: center;
         }
 
         /* Redirect Blur Effect */
@@ -35,6 +53,7 @@
             border-radius: 30px; border: 1px solid #ff69b4; 
             backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
             will-change: transform;
+            margin-top: 65px; /* বিজ্ঞাপনের জন্য কনটেন্টকে কিছুটা নিচে নামানো হয়েছে */
         }
         
         .match-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 25px; }
@@ -77,6 +96,20 @@
     </style>
 </head>
 <body>
+
+    <!-- বিজ্ঞাপন (Ad) সেকশন -->
+    <div class="top-ad-container">
+        <script>
+            atOptions = {
+                'key' : '57f113ac133c41ef3f2fa992693d09ca',
+                'format' : 'iframe',
+                'height' : 50,
+                'width' : 320,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/57f113ac133c41ef3f2fa992693d09ca/invoke.js"></script>
+    </div>
 
     <div id="redirect-overlay">
         <div class="loading-box">
@@ -147,14 +180,13 @@
                 if (window.confetti) confetti({ particleCount: 100, spread: 60 });
                 
                 track('Match_Found');
-                setTimeout(handleStartChat, 1000); // ১ সেকেন্ড পর অটো রিডাইরেক্ট
+                setTimeout(handleStartChat, 1000); 
             }, 600);
         }
 
         function handleStartChat() {
             track('Button_Click');
             
-            // ঝাপসা করা এবং লোডার দেখানো
             document.body.classList.add('is-redirecting');
             overlay.style.display = 'flex';
             
