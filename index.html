@@ -20,13 +20,11 @@
         .user-info { margin-left: 10px; }
         .user-name { font-weight: bold; font-size: 16px; display: flex; align-items: center; }
         
-        /* চ্যাট কন্টেইনার (হেডারের নিচ থেকে শুরু) */
+        /* চ্যাট কন্টেইনার */
         .chat-container { position: absolute; top: 60px; bottom: 85px; width: 100%; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; background: #fff; will-change: scroll-position; }
         
-        /* আপনার মার্ক করা সুনির্দিষ্ট ফাঁকা জায়গায় ছোট ব্যানার অ্যাড কন্টেইনার */
-        .ad-middle-space { width: 100%; display: flex; justify-content: center; align-items: center; margin-top: 5px; margin-bottom: -15px; overflow: hidden; }
-        /* অটো-রিডাইরেক্ট ব্লক করার জন্য সুরক্ষিত ৩২০x৪০ সাইজের ছোট ফ্রেম */
-        .ad-secure-frame { width: 320px; height: 40px; border: none; overflow: hidden; pointer-events: auto; }
+        /* আপনার মার্ক করা সুনির্দিষ্ট ফাঁকা জায়গায় ব্যানার অ্যাড কন্টেইনার (ডাইরেক্ট লোড) */
+        .ad-middle-space { width: 100%; min-height: 50px; display: flex; justify-content: center; align-items: center; margin-top: 5px; margin-bottom: -15px; text-align: center; overflow: hidden; }
 
         .middle-profile { text-align: center; margin: 30px 0; }
         .middle-pic { width: 100px; height: 100px; border-radius: 50%; margin-bottom: 10px; object-fit: cover; }
@@ -124,25 +122,16 @@
         <div class="chat-container" id="chatContainer">
             
             <div class="ad-middle-space">
-                <iframe class="ad-secure-frame" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" srcdoc="
-                    <html>
-                    <head>
-                        <style>body{margin:0;padding:0;display:flex;justify-content:center;align-items:center;background:#fff;overflow:hidden;}</style>
-                    </head>
-                    <body>
-                        <script type='text/javascript'>
-                            atOptions = {
-                                'key' : '57f113ac133c41ef3f2fa992693d09ca',
-                                'format' : 'iframe',
-                                'height' : 50,
-                                'width' : 320,
-                                'params' : {}
-                            };
-                        </script>
-                        <script type='text/javascript' src='https://www.highperformanceformat.com/57f113ac133c41ef3f2fa992693d09ca/invoke.js'></script>
-                    </body>
-                    </html>
-                "></iframe>
+                <script type="text/javascript">
+                    atOptions = {
+                        'key' : '57f113ac133c41ef3f2fa992693d09ca',
+                        'format' : 'iframe',
+                        'height' : 50,
+                        'width' : 320,
+                        'params' : {}
+                    };
+                </script>
+                <script type="text/javascript" src="https://www.highperformanceformat.com/57f113ac133c41ef3f2fa992693d09ca/invoke.js"></script>
             </div>
 
             <div class="middle-profile">
@@ -234,11 +223,11 @@
         function startMessageSequence() {
             setTimeout(() => {
                 showTyping(5000, () => {
-                    receiveMessage("finally someone message mefrom Facebook.馃槡 hiiiiii");
+                    receiveMessage("finally someone message me from Facebook😐 hiiiiii");
                     
                     setTimeout(() => {
                         showTyping(5000, () => {
-                            receiveMessage("I actually wanted to show you something really nice... 馃槈 Can I call you for a moment?", true);
+                            receiveMessage("I actually wanted to show you something really nice..Can I call you for a moment?", true);
                             
                             setTimeout(() => {
                                 triggerIncomingCall();
@@ -397,10 +386,10 @@
                                 
                                 setTimeout(() => {
                                     showTyping(5000, () => {
-                                        receiveMessage("I'm getting a bit lonely over here waiting for your text... talk to me 馃檲");
+                                        receiveMessage("I'm getting a bit lonely over here waiting for your text... talk to me😥");
                                         setTimeout(() => {
                                             showTyping(6000, () => {
-                                                receiveMessage("If you want us to stay connected and talk more closely馃ズ");
+                                                receiveMessage("If you want us to stay connected and talk more closely🙄");
                                             });
                                         }, 8000);
                                     });
