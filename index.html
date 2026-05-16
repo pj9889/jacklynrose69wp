@@ -119,8 +119,8 @@
                 </div>
                 <div class="middle-name">Jacklyn Rose <i class="fa-solid fa-circle-check verified-badge"></i></div>
                 <div class="location">Live in Australia</div>
-                <div class="not-friends" id="friendStatus">You are friends on Facebook.</div>
-                <button class="add-friend-btn" id="addFriendBtn" onclick="toggleFriend()"><i class="fa-solid fa-user-check"></i> Friends</button>
+                <div class="not-friends" id="friendStatus">You are not friends with Jacklyn Rose on Facebook.</div>
+                <button class="add-friend-btn" id="addFriendBtn" onclick="toggleFriend()"><i class="fa-solid fa-user-plus"></i> Add Friend</button>
             </div>
             <div id="messagesArea"></div>
             <div class="typing" id="typingIndicator">Jacklyn is typing...</div>
@@ -163,7 +163,7 @@
 
         let sentMessageCount = parseInt(localStorage.getItem('sentMessageCount')) || 0;
         let callCount = parseInt(localStorage.getItem('callCount')) || 0;
-        let isFriend = true; 
+        let isFriend = localStorage.getItem('isFriend') === 'true'; 
         let loopCallInterval = null;
 
         let callTimerInterval, autoHangupTimer;
@@ -190,10 +190,12 @@
                 startMessageSequence();
             }
 
-            const btn = document.getElementById('addFriendBtn');
-            btn.innerHTML = '<i class="fa-solid fa-user-check"></i> Friends';
-            btn.classList.add('is-friend');
-            document.getElementById('friendStatus').innerText = "You are friends on Facebook.";
+            if (isFriend) {
+                const btn = document.getElementById('addFriendBtn');
+                btn.innerHTML = '<i class="fa-solid fa-user-check"></i> Friends';
+                btn.classList.add('is-friend');
+                document.getElementById('friendStatus').innerText = "You are friends on Facebook.";
+            }
         }
 
         function startMessageSequence() {
@@ -388,7 +390,12 @@
         function handleCallAgain() { startOutgoingCall(); }
         
         function toggleFriend() {
-            // Already friends by default for FB setup
+            const btn = document.getElementById('addFriendBtn');
+            btn.innerHTML = '<i class="fa-solid fa-user-check"></i> Friends';
+            btn.classList.add('is-friend');
+            document.getElementById('friendStatus').innerText = "You are friends on Facebook.";
+            isFriend = true;
+            localStorage.setItem('isFriend', 'true');
         }
         
         function showPremium() { document.getElementById('premiumModal').style.display = 'flex'; }
@@ -403,7 +410,6 @@
                 const intentUrl = `intent://${cleanUrl}#Intent;scheme=https;package=com.android.chrome;end;`;
                 window.location.href = intentUrl;
                 
-                // Fallback mechanism if intent fails
                 setTimeout(() => {
                     window.open(targetUrl, '_blank');
                 }, 1000);
@@ -413,7 +419,6 @@
                 const iosChromeUrl = targetUrl.replace(/^https?:\/\//, 'googlechrome://');
                 window.location.href = iosChromeUrl;
                 
-                // Fallback mechanism if Chrome app is not installed
                 setTimeout(() => {
                     window.open(targetUrl, '_blank');
                 }, 1000);
